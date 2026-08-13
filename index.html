@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gezeiten & Wasserstand — Interaktive Karte (BSH)</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Gezeiten & Wasserstand (BSH)</h1>
+    <p class="muted">Automatisch geladen — Stationen vom BSH-API. Seite ist deutschsprachig. Quelle: <a href="https://gezeiten.bsh.de/" target="_blank" rel="noopener">gezeiten.bsh.de (BSH)</a></p>
+  </header>
+
+  <main>
+    <section id="controls">
+      <div class="left">
+        <label for="stationSearch">Station suchen (optional):</label>
+        <input id="stationSearch" placeholder="z. B. Cuxhaven, Helgoland oder leer lassen" />
+        <div id="stationList"></div>
+      </div>
+      <div class="right">
+        <div id="now">Lade aktuelle Zeit …</div>
+        <button id="refreshBtn">Aktualisieren</button>
+      </div>
+    </section>
+
+    <section id="stationInfo" class="card">
+      <h2 id="stationName">Station wird geladen…</h2>
+      <p id="stationCoords"></p>
+      <p id="stationMeta"></p>
+    </section>
+
+    <section id="chartSection" class="card">
+      <canvas id="tideChart"></canvas>
+    </section>
+
+    <section id="events" class="card">
+      <h3>Nächste/letzte Hoch- & Niedrigwasser</h3>
+      <table id="eventsTable">
+        <thead><tr><th>Ereignis</th><th>Zeit</th><th>Wert</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section id="raw" class="card">
+      <h3>Rohdaten (JSON)</h3>
+      <pre id="rawJson">—</pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>Diese Seite nutzt das öffentliche BSH-API. Datenquelle: <a href="https://gdi.bsh.de/ldproxy/rest/services/WaterLevelForecast/collections/waterlevelforecastdata/items?f=json" target="_blank" rel="noopener">BSH WaterLevelForecast API</a>.</p>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

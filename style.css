@@ -1,0 +1,25 @@
+/* style.css - einfaches Styling für die Gezeiten-Website */
+:root{--bg:#f7fafc;--card:#ffffff;--muted:#6b7280;--accent:#0366d6}
+*{box-sizing:border-box}
+body{font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial; margin:0; background:var(--bg); color:#0f172a}
+header{padding:20px;text-align:center;background:linear-gradient(90deg,#e6f0ff,transparent)}
+header h1{margin:0 0 6px;font-size:1.4rem}
+.muted{color:var(--muted);margin:0}
+main{max-width:1000px;margin:20px auto;padding:0 16px}
+.card{background:var(--card);padding:16px;border-radius:8px;box-shadow:0 1px 3px rgba(2,6,23,0.06);margin-bottom:16px}
+#controls{display:flex;justify-content:space-between;gap:12px;align-items:center}
+#controls .left{flex:1}
+#controls .right{width:220px;text-align:right}
+input#stationSearch{width:100%;padding:8px;border-radius:6px;border:1px solid #e6edf3}
+#stationList{margin-top:6px}
+.stationItem{padding:6px;border-radius:6px;cursor:pointer}
+.stationItem:hover{background:#eef6ff}
+#now{color:var(--muted);font-size:0.95rem}
+button{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer}
+button:active{transform:translateY(1px)}
+#tideChart{width:100%;height:360px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:8px;border-bottom:1px solid #eef2f7;text-align:left}
+pre{white-space:pre-wrap;word-wrap:break-word;max-height:240px;overflow:auto}
+footer{text-align:center;padding:12px;color:var(--muted)}
+@media (max-width:700px){#controls{flex-direction:column;align-items:stretch}.right{text-align:left;width:auto}}
