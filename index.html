@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tidenkalender — Gezeiten &amp; Wasserstände</title>
+<meta name="description" content="Interaktiver Gezeitenkalender mit Hoch- und Niedrigwasserzeiten in Ortszeit und UTC, Mond­phasen sowie Spring-/Nipptide-Kennzeichnung, basierend auf offiziellen BSH-Daten.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="ocean-bg" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <span class="brand-icon">⚓</span>
+      <div class="brand-text">
+        <h1>Tidenkalender</h1>
+        <p>Gezeiten &amp; Wasserstände an der deutschen Küste</p>
+      </div>
+    </div>
+    <div class="header-meta" id="lastUpdate">Lade Daten …</div>
+  </div>
+  <svg class="wave-divider" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,20 C150,40 350,0 600,20 C850,40 1050,0 1200,20 L1200,40 L0,40 Z"></path>
+  </svg>
+</header>
+
+<main>
+
+  <section class="panel filter-panel" aria-label="Filter">
+    <div class="filter-grid">
+
+      <div class="field">
+        <label for="countrySelect">Land</label>
+        <select id="countrySelect">
+          <option value="DE">🇩🇪 Deutschland</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="regionSelect">Küstenregion</label>
+        <select id="regionSelect">
+          <option value="">Alle Regionen</option>
+          <option value="north_sea">Nordsee</option>
+          <option value="baltic_sea">Ostsee</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="stateSelect">Bundesland</label>
+        <select id="stateSelect">
+          <option value="">Alle Bundesländer</option>
+        </select>
+      </div>
+
+      <div class="field field-search">
+        <label for="stationSearch">Ort / Pegel suchen</label>
+        <input type="text" id="stationSearch" placeholder="z. B. Cuxhaven, Sylt, Rügen …" autocomplete="off">
+        <div id="stationDropdown" class="station-dropdown" hidden></div>
+      </div>
+
+    </div>
+    <p class="station-count" id="stationCount"></p>
+  </section>
+
+  <section id="stateMessage" class="panel state-message" hidden></section>
+
+  <section id="stationView" class="station-view" hidden>
+
+    <div class="panel station-header">
+      <div class="station-title">
+        <h2 id="stationName">—</h2>
+        <p id="stationSub">—</p>
+      </div>
+      <div class="station-badges">
+        <span class="badge" id="badgeRegion">—</span>
+        <span class="badge" id="badgeMHW">MHW —</span>
+        <span class="badge" id="badgeMNW">MNW —</span>
+      </div>
+      <a id="stationLink" href="#" target="_blank" rel="noopener" class="btn-outline">BSH-Vorhersage öffnen ↗</a>
+    </div>
+
+    <div class="panel forecast-note" id="forecastNote" hidden></div>
+
+    <div class="panel table-panel">
+      <div class="table-scroll">
+        <table id="tideTable">
+          <thead>
+            <tr>
+              <th>Datum</th>
+              <th>Ortszeit</th>
+              <th>UTC</th>
+              <th>Ereignis</th>
+              <th>Vorhersagewert</th>
+              <th>Tidenart</th>
+              <th>Mond</th>
+            </tr>
+          </thead>
+          <tbody id="tideTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel curve-panel">
+      <h3>Wasserstandskurve (48 h)</h3>
+      <svg id="curveChart" viewBox="0 0 900 220" preserveAspectRatio="none"></svg>
+    </div>
+
+  </section>
+
+  <section id="emptyState" class="panel empty-state">
+    <span class="empty-icon">🌊</span>
+    <p>Bitte wähle links einen Ort bzw. Pegel aus, um den Tidenkalender anzuzeigen.</p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>
+    Datenquelle: <a href="https://gdi.bsh.de/ldproxy/rest/services/WaterLevelForecast" target="_blank" rel="noopener">Bundesamt für Seeschifffahrt und Hydrographie (BSH)</a>,
+    amtliche Wasserstandsvorhersage gemäß §1 SeeAufG, lizenziert unter
+    <a href="https://creativecommons.org/licenses/by/4.0/legalcode.de" target="_blank" rel="noopener">CC BY 4.0</a>.
+    Mondphasen astronomisch berechnet. Tidenart (Spring-/Nipp-/Mitteltide) automatisch aus dem Mondzyklus abgeleitet
+    und daher als Orientierung, nicht als amtliche Angabe zu verstehen.
+  </p>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
